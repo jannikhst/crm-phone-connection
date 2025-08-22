@@ -48,6 +48,23 @@ A minimal Node.js Express application that receives CRM webhooks and sends push 
 
 ### Docker Deployment
 
+#### Option 1: Use Pre-built Image from GitHub Container Registry
+
+1. **Update compose.yaml to use the published image:**
+   ```yaml
+   services:
+     app:
+       image: ghcr.io/your-username/crm-mobile-push:latest
+       # Remove the 'build: .' line
+   ```
+
+2. **Start with Docker Compose:**
+   ```bash
+   docker compose up -d
+   ```
+
+#### Option 2: Build Locally
+
 1. **Build and start with Docker Compose:**
    ```bash
    docker compose up -d
@@ -57,6 +74,13 @@ A minimal Node.js Express application that receives CRM webhooks and sends push 
    ```bash
    curl http://localhost:3000/health
    ```
+
+#### Available Docker Images
+
+The application is automatically built and published to GitHub Container Registry:
+- `ghcr.io/your-username/crm-mobile-push:latest` - Latest main branch
+- `ghcr.io/your-username/crm-mobile-push:v1.0.0` - Specific version tags
+- Multi-architecture support: `linux/amd64` and `linux/arm64`
 
 ## API Endpoints
 
@@ -206,6 +230,37 @@ The application provides detailed console logging:
 - 📤 Push notification sending
 - ❌ Error handling and cleanup
 - 🗑️ Invalid subscription removal
+
+## CI/CD Pipeline
+
+The project includes a GitHub Actions workflow that automatically:
+
+- **Builds Docker images** on push to `main` and `develop` branches
+- **Publishes to GitHub Container Registry** (ghcr.io)
+- **Supports multi-architecture builds** (AMD64 and ARM64)
+- **Creates version tags** from Git tags (e.g., `v1.0.0`)
+- **Generates build attestations** for security
+
+### Triggering Builds
+
+- **Push to main/develop**: Creates `latest` and branch-specific tags
+- **Create Git tag**: Creates version-specific tags (e.g., `git tag v1.0.0 && git push --tags`)
+- **Pull requests**: Builds but doesn't push (for testing)
+
+### Using Published Images
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/your-username/crm-mobile-push:latest
+
+# Run directly
+docker run -p 3000:3000 --env-file .env ghcr.io/your-username/crm-mobile-push:latest
+
+# Use in compose.yaml
+services:
+  app:
+    image: ghcr.io/your-username/crm-mobile-push:latest
+```
 
 ## Development
 
