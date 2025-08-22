@@ -32,6 +32,10 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
 // Initialize VAPID service
 vapidService.initialize(ADMIN_EMAIL);
 
+// Trust proxy configuration for rate limiting and X-Forwarded-* headers
+// This is needed when running behind reverse proxies (Docker, nginx, etc.)
+app.set('trust proxy', true);
+
 // Middleware
 app.use(express.json({ limit: '1mb' }));
 app.use(express.static(path.join(__dirname, '../public')));
