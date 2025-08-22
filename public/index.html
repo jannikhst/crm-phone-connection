@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Mobile Push - Registration</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #555;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #007AFF;
+    }
+    
+    button {
+      background: #007AFF;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    
+    button:hover {
+      background: #0056CC;
+    }
+    
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .status {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    
+    .instructions {
+      background: #f8f9fa;
+      border-left: 4px solid #007AFF;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .instructions h3 {
+      margin-top: 0;
+      color: #007AFF;
+    }
+    
+    .ios-warning {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      color: #856404;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .ios-warning strong {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    code {
+      background: #f1f3f4;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 CRM Mobile Push</h1>
+    
+    <div class="instructions">
+      <h3>Setup Instructions</h3>
+      <ol>
+        <li>Enter your User ID (this identifies you in the CRM system)</li>
+        <li>Click "Enable Push Notifications" to register your device</li>
+        <li>Allow notifications when prompted by your browser</li>
+        <li>Your device is now ready to receive CRM call notifications!</li>
+      </ol>
+    </div>
+    
+    <div class="ios-warning">
+      <strong>📱 iOS Users:</strong>
+      For push notifications to work on iOS, you must:
+      <ul>
+        <li>Use Safari browser (iOS 16.4+)</li>
+        <li>Add this page to your Home Screen first</li>
+        <li>Open the app from the Home Screen icon</li>
+        <li>Then enable notifications</li>
+      </ul>
+    </div>
+    
+    <form id="registrationForm">
+      <div class="form-group">
+        <label for="userId">User ID:</label>
+        <input 
+          type="text" 
+          id="userId" 
+          name="userId" 
+          placeholder="Enter your CRM user ID (e.g., sales-001)"
+          required
+        >
+      </div>
+      
+      <button type="submit" id="enableButton">
+        🔔 Enable Push Notifications
+      </button>
+    </form>
+    
+    <div id="status" class="status"></div>
+    
+    <div style="margin-top: 2rem; text-align: center; color: #666; font-size: 0.9rem;">
+      <p>
+        <strong>Test the webhook:</strong><br>
+        <code>POST /webhooks/call</code> with header <code>X-Webhook-Token</code><br>
+        Body: <code>{"owner_user_id": "your-user-id", "callee_number": "+1234567890"}</code>
+      </p>
+    </div>
+  </div>
+
+  <script src="/register.js"></script>
+</body>
+</html>
