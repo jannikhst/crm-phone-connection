@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    container_name: crm-mobile-push
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    networks:
+      - traefik_web
+    restart: unless-stopped
+    labels:
+      - "com.docker.compose.project=crm-mobile-push"
+      - "description=CRM Mobile Push Notification Service"
+
+networks:
+  traefik_web:
+    external: true
