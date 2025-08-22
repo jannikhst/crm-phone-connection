@@ -4,7 +4,8 @@ const CACHE_NAME = 'crm-push-v1';
 const urlsToCache = [
   '/',
   '/register.js',
-  '/favicon.ico'
+  '/manifest.json',
+  '/logo.png'
 ];
 
 // Install event - cache resources
@@ -76,8 +77,8 @@ self.addEventListener('push', (event) => {
   let notificationData = {
     title: '📞 CRM Call',
     body: 'You have an incoming call',
-    icon: '/favicon.ico',
-    badge: '/favicon.ico',
+    icon: '/logo.png',
+    badge: '/logo.png',
     tag: 'crm-call',
     requireInteraction: true,
     data: {

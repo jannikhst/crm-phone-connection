@@ -1,0 +1,46 @@
+{
+  "name": "CRM Mobile Push",
+  "short_name": "CRM Push",
+  "description": "CRM Mobile Push Notification Service for instant phone dialing",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#007AFF",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Register Device",
+      "short_name": "Register",
+      "description": "Register device for push notifications",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
